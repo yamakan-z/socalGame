@@ -183,10 +183,14 @@ public class CharaStatusData
 }
 
 
+//ステージデータ
 [System.Serializable] 
 public class StageMasterData
 {
     public int stage_id;        //ステージのID
     public string name;         //ステージの名前
     public int unlock_stage_id; //解除条件
+    public int boss_hp;         //ボスのHP
+    public int boss_atk;        //ボスの攻撃力
+    public int boss_def;        //ボスの防御力
 }

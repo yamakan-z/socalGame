@@ -10,6 +10,14 @@ public class StageSelectScene : SceneBase
     [SerializeField]
     private GameObject stageCellPrefab;//生成するプレハブデータ
 
+
+    //取得したステージのボスのステータスを入れる
+    public int boss_hp;
+
+    public int boss_atk;
+
+    public int boss_def;
+
     public override IEnumerator ViewWillFadeIn()
     {
         yield return base.ViewWillFadeIn();
@@ -41,7 +49,7 @@ public class StageSelectScene : SceneBase
                 }
                 else
                 {
-                    Debug.Log("ぉｃｌ");
+                   // Debug.Log("ぉｃｌ");
                     //まだロック中
                     cell.SetLockStage(true);
                 }
@@ -58,7 +66,8 @@ public class StageSelectScene : SceneBase
                     {
                         //解放条件を満たしている
                          SelectStage(stage.stage_id);
-                         
+
+                         Debug.Log("bhp"+stage.boss_hp);
                     }
 
 

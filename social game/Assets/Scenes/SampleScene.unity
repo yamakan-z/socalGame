@@ -2067,7 +2067,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: b96ee31292dbadf43a4e1213f95de84b, type: 3}
   - {fileID: 4900000, guid: 2dc659f359ea5af4994ea6b040c28d92, type: 3}
   - {fileID: 4900000, guid: 774771555b226514ea276b20930b531f, type: 3}
-  stageMasterDataText: {fileID: 4900000, guid: a01f3e97fad8b9949a5103ba4a442af6, type: 3}
+  stageMasterDataText: {fileID: 4900000, guid: 7b267727d7b6738428d68db47aa75563, type: 3}
 --- !u!4 &1512970784
 Transform:
   m_ObjectHideFlags: 0
