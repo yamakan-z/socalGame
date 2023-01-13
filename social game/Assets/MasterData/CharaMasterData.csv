@@ -1,0 +1,11 @@
+chara_id,name,rank,icon_sprite,stand_sprite
+1,テツノツツミ,R,Assets/Resources/Chara/Icon/chara_i001.png,Assets/Resources/Chara/Stand/chara_s001.png
+2,帝京平成大学 中野キャンパス,R,Assets/Resources/Chara/Icon/chara_i002.png,Assets/Resources/Chara/Stand/chara_s002.png
+3,ツリーと俺,R,Assets/Resources/Chara/Icon/chara_i003.png,Assets/Resources/Chara/Stand/chara_s003.png
+4,キャラ4,R,Assets/Resources/Chara/Icon/chara_i004.png,Assets/Resources/Chara/Stand/chara_s004.png
+5,キャラ5,R,Assets/Resources/Chara/Icon/chara_i005.png,Assets/Resources/Chara/Stand/chara_s005.png
+6,キャラ6,SR,Assets/Resources/Chara/Icon/chara_i006.png,Assets/Resources/Chara/Stand/chara_s006.png
+7,キャラ7,SR,Assets/Resources/Chara/Icon/chara_i007.png,Assets/Resources/Chara/Stand/chara_s007.png
+8,キャラ8,SR,Assets/Resources/Chara/Icon/chara_i008.png,Assets/Resources/Chara/Stand/chara_s008.png
+9,努力　未来　A Beautiful Star,SSR,Assets/Resources/Chara/Icon/chara_i009.png,Assets/Resources/Chara/Stand/chara_s009.png
+10,成長するものと生きるもの、いつも美しさで終わるもの,SSR,Assets/Resources/Chara/Icon/chara_i010.png,Assets/Resources/Chara/Stand/chara_s010.png
