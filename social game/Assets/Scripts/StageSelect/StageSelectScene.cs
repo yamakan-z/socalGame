@@ -10,13 +10,13 @@ public class StageSelectScene : SceneBase
     [SerializeField]
     private GameObject stageCellPrefab;//生成するプレハブデータ
 
+    [SerializeField]
+    private GameObject battlemanager;//バトルマネージャー呼び出し
 
-    //取得したステージのボスのステータスを入れる
-    public int boss_hp;
-
-    public int boss_atk;
-
-    public int boss_def;
+    private void Start()
+    {
+        battlemanager = GameObject.Find("BattleManager");
+    }
 
     public override IEnumerator ViewWillFadeIn()
     {
@@ -28,7 +28,10 @@ public class StageSelectScene : SceneBase
         //クリアしたステージデータ
         var stageClearData = ManagerAccessor.Instance.dataManager.GetStageClearData();
 
-        foreach(var stage in stageData)
+        BattleManager battleManager = battlemanager.GetComponent<BattleManager>();//スクリプト獲得
+
+
+        foreach (var stage in stageData)
         {
             GameObject obj = Instantiate(stageCellPrefab, Vector3.zero, Quaternion.identity, contentObj.transform);
             StageCell cell = obj.GetComponent<StageCell>();
@@ -64,10 +67,16 @@ public class StageSelectScene : SceneBase
                     //ステージタップされた状態
                     if(stage.unlock_stage_id == 0||stageClearData.stageClearList.Contains(stage.unlock_stage_id))
                     {
-                        //解放条件を満たしている
-                         SelectStage(stage.stage_id);
+                    
+                    //ボスのステータスをバトルマネージャーに入れる
+                    battleManager.B_hp  = stage.boss_hp;
+                    battleManager.B_atk = stage.boss_atk;
+                    battleManager.B_def = stage.boss_def;
 
-                         Debug.Log("bhp"+stage.boss_hp);
+                    //解放条件を満たしている
+                    SelectStage(stage.stage_id);
+
+                         //Debug.Log("bhp"+stage.boss_hp);
                     }
 
 

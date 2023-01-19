@@ -11,11 +11,26 @@ public class BattleScene : SceneBase
     [SerializeField]
     private Image[] charaimage;
 
+    [SerializeField]
+    private GameObject battlemanager;//バトルマネージャー呼び出し
+
+    BattleManager b_manager;//バトルマネージャースクリプト
+
+
+    [NamedArrayAttribute(new string[] { "キャラのHP", "キャラの攻撃力", "キャラの防御力", "ここから先はNULL" })]
+    public int[] Player1_Status = new int[3];
+    [NamedArrayAttribute(new string[] { "キャラのHP", "キャラの攻撃力", "キャラの防御力", "ここから先はNULL" })]
+    public int[] Player2_Status = new int[3];
+    [NamedArrayAttribute(new string[] { "キャラのHP", "キャラの攻撃力", "キャラの防御力", "ここから先はNULL" })]
+    public int[] Player3_Status = new int[3];
+
     //呼び出された瞬間に呼ばれる関数
-   public override void Init()
+    public override void Init()
     {
         base.Init();
         stageSelectData = (StageSelectData)ManagerAccessor.Instance.sceneManager.DeliveryData;
+        battlemanager = GameObject.Find("BattleManager");
+        b_manager = battlemanager.GetComponent<BattleManager>();//スクリプト獲得
     }
 
     public override IEnumerator ViewWillFadeIn()
@@ -31,14 +46,6 @@ public class BattleScene : SceneBase
 
             // 編成情報					
             EditData editData = ManagerAccessor.Instance.dataManager.GetEditData();
-
-            //全ステージデータ
-            var stageData = ManagerAccessor.Instance.dataManager.GetAllStageData();
-
-            //foreach(var stage in stageData)
-            //{
-            //    Debug.Log("bhp" + stage.boss_hp);
-            //}
 
             for (int i = 0; i < editData.editCharaList.Count; i++)
             {
@@ -81,6 +88,8 @@ public class BattleScene : SceneBase
                 // Debug.Log(chara.atk);
                 // Debug.Log(chara.def);
             }
+
+
         }));
     }
 
@@ -115,6 +124,13 @@ public class BattleScene : SceneBase
         {
             //敗北したときの処理
         }
+    }
+
+    public void BattleButton()
+    {
+        Debug.Log("敵にダメージ");
+        
+
     }
 
 }

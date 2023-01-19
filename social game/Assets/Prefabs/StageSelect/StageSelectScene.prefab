@@ -1221,6 +1221,10 @@ MonoBehaviour:
   canvas: {fileID: 5418909967666141263}
   contentObj: {fileID: 1010879614880326788}
   stageCellPrefab: {fileID: 6933084879423241127, guid: a3758c329fa4c6b45b3f4e6bb7fde841, type: 3}
+  BattleManager: {fileID: 0}
+  boss_hp: 0
+  boss_atk: 0
+  boss_def: 0
 --- !u!1 &9131233424875482714
 GameObject:
   m_ObjectHideFlags: 0
