@@ -69,6 +69,8 @@ public class BattleScene : SceneBase
 
     private void Update()
     {
+        //どうやらアップデートは使えないので別の方法を探す
+
         boss_atktime -= Time.deltaTime;
 
         if(boss_atktime < 0)
@@ -227,7 +229,7 @@ public class BattleScene : SceneBase
                 charahp_bar[0].value = (float)Player1_Status[0] / (float)max_CharaHP[0];//HPバーに反映
             }
 
-            if(Player1_Status[0] < 0)
+            if(Player1_Status[0] <= 0)
             {
                 Debug.Log("死");
 
@@ -252,7 +254,7 @@ public class BattleScene : SceneBase
                 charahp_bar[1].value = (float)Player2_Status[0] / (float)max_CharaHP[1];//HPバーに反映
             }
 
-            if (Player2_Status[0] < 0)
+            if (Player2_Status[0] <= 0)
             {
                 Debug.Log("2死");
 
@@ -276,7 +278,7 @@ public class BattleScene : SceneBase
                 charahp_bar[2].value = (float)Player3_Status[0] / (float)max_CharaHP[2];//HPバーに反映
             }
 
-            if (Player3_Status[0] < 0)
+            if (Player3_Status[0] <= 0)
             {
                 Debug.Log("3死");
 
@@ -295,8 +297,11 @@ public class BattleScene : SceneBase
 
         b_manager.B_hp -= total_atk;
 
+        boss_atktime--;
+
         //ボスのHPバーに反映
         bosshp_bar.value = (float)b_manager.B_hp / (float)max_BossHP;
+
     }
 
 }

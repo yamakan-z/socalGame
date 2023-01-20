@@ -72,6 +72,10 @@ public class StageSelectScene : SceneBase
                     battleManager.B_hp  = stage.boss_hp;
                     battleManager.B_atk = stage.boss_atk;
                     battleManager.B_def = stage.boss_def;
+                    //ステージIDをバトルマネージャーに入れる
+                    battleManager.Stage_Id = stage.stage_id;
+
+                    battleManager.B_Awakening = stage.boss_awakening;//覚醒状態を入れる
 
                     //解放条件を満たしている
                     SelectStage(stage.stage_id);

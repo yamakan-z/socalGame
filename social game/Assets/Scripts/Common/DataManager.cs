@@ -193,4 +193,5 @@ public class StageMasterData
     public int boss_hp;         //ボスのHP
     public int boss_atk;        //ボスの攻撃力
     public int boss_def;        //ボスの防御力
+    public int boss_awakening;  //ボスの覚醒（0：なし、1：あり）
 }

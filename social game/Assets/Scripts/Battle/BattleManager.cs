@@ -9,6 +9,10 @@ public class BattleManager : MonoBehaviour
     public int B_atk;
     public int B_def;
 
+    public int Stage_Id;//現在のステージID取得
+    public int B_Awakening;//覚醒の有無
+
+
     //キャラデータから各キャラのステータスを取得
 
 
