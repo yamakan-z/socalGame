@@ -90,7 +90,7 @@ public class BattleManager : MonoBehaviour
         judge = false;
 
         // 3•bŠÔ‘Ò‚Â
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(4.5f);
 
         battlescene.Win();//ƒ{ƒXHP0‚ÅŸ—˜
     }

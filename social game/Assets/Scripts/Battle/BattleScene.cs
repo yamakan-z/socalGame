@@ -282,6 +282,8 @@ public class BattleScene : SceneBase
         {
             Debug.Log("敵にダメージ");
 
+            atkani.se_audio.PlayOneShot(atkani.SE[1]);//打撃音
+
             b_manager.B_hp -= total_atk;
 
             //ボスのHPバーに反映

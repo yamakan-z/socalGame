@@ -9,6 +9,8 @@ public class AtkAni : MonoBehaviour
 
     public GameObject[] DamegeImage;
 
+    public GameObject DeathAnim;//ボス撃破アニメーション
+
     public int Ani_num;//アニメーションを流すキャラ番号
 
     private bool one;//一回だけ処理を通す
@@ -26,7 +28,7 @@ public class AtkAni : MonoBehaviour
     public AudioSource start_se;//登場ボイスを流す
 
     //汎用SE
-    [NamedArrayAttribute(new string[] { "攻撃SE", "大技SE", "攻撃ボタンSE", "ここから先はNULL" })]
+    [NamedArrayAttribute(new string[] { "攻撃SE","攻撃ボタンSE", "ここから先はNULL" })]
     public AudioClip[] SE;
 
     //各ボスのSE
@@ -77,7 +79,7 @@ public class AtkAni : MonoBehaviour
         {
             one = false;
 
-            DamegeImage[0].SetActive(true);
+            DamegeImage[0].SetActive(true);//攻撃アニメーションを表示
 
             se_audio.PlayOneShot(UseBossSE[1]);//ボスボイス：攻撃
 
@@ -143,6 +145,9 @@ public class AtkAni : MonoBehaviour
     public void BossDead()
     {
         b_manager.boss_death = true;
+
+        DeathAnim.SetActive(true);//アニメーション起動
+
         //ボスが死ぬとき
         se_audio.PlayOneShot(UseBossSE[3]);//ボスボイス：死亡
         // コルーチンの起動
