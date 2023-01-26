@@ -14,6 +14,8 @@ public class BattleManager : MonoBehaviour
 
     public float boss_atktime;//ボスの攻撃間隔
 
+    public int start_spatk;//大技の発動開始フラグ 
+
     public bool updatastart;//アップデートの処理を動かす
 
     public bool timestart;//攻撃タイマー起動
@@ -31,8 +33,12 @@ public class BattleManager : MonoBehaviour
 
     public bool judge;//一回だけ処理を通す(勝ち・負け判定を同時に行わせないため）
 
-    public bool boss_death;
-    
+    public bool boss_death;//ボス死亡フラグ
+
+    [SerializeField]
+    private float timeleft;//必殺技抽選用のカウントダウン
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +50,6 @@ public class BattleManager : MonoBehaviour
     void Update()
     {
         
-
         //バトルシーンが生成されたらタイマー開始
         if (updatastart)
         {
@@ -63,7 +68,24 @@ public class BattleManager : MonoBehaviour
             }
 
             if(timestart && !boss_death)
-            boss_atktime -= Time.deltaTime;
+            boss_atktime -= Time.deltaTime;//ここで攻撃時間のカウントダウン
+
+            //ボスのHPが一定を下回ると大技
+            if(B_hp <= battlescene.max_BossHP/2 && start_spatk == 0)
+            {
+                timeleft -= Time.deltaTime;
+
+                if (timeleft <= 0.0)
+                {
+                    timeleft = 1.0f;
+                    SP_Atk_Time();
+                    if(start_spatk == 1)
+                    {
+                        Debug.Log("ひさい");
+                    }
+                }
+                    
+            }
 
             //攻撃時間が0になったら攻撃
             if(boss_atktime<=0)
@@ -89,10 +111,9 @@ public class BattleManager : MonoBehaviour
         Debug.Log("勝ち");
         judge = false;
 
-        // 3秒間待つ
-        yield return new WaitForSeconds(4.5f);
+        yield return new WaitForSeconds(4.5f); //爆発アニメーション終了まで待つ
 
-        battlescene.Win();//ボスHP0で勝利
+        battlescene.Win();//勝利処理を行う
     }
 
     private IEnumerator LoseAni()
@@ -109,5 +130,10 @@ public class BattleManager : MonoBehaviour
     {
         //3～5秒の間でボスが攻撃
         boss_atktime = Random.Range(3.0f, 6.0f);
+    }
+
+    public void SP_Atk_Time()
+    {
+        start_spatk = Random.Range(0, 2);
     }
 }

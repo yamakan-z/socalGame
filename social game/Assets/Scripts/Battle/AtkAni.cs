@@ -53,6 +53,8 @@ public class AtkAni : MonoBehaviour
             StartBossSE_End = true;
         }
 
+       
+
         se_one = true;
         one = true;
     }
@@ -144,10 +146,10 @@ public class AtkAni : MonoBehaviour
 
     public void BossDead()
     {
-        b_manager.boss_death = true;
+        b_manager.boss_death = true;//ボス死亡フラグON
 
         DeathAnim.SetActive(true);//アニメーション起動
-
+       
         //ボスが死ぬとき
         se_audio.PlayOneShot(UseBossSE[3]);//ボスボイス：死亡
         // コルーチンの起動

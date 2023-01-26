@@ -36,8 +36,7 @@ public class BattleScene : SceneBase
 
     public Slider[] charahp_bar = new Slider[3];
 
-    [SerializeField]
-    private int max_BossHP;//ボスの最大HP（HPバー用）
+    public int max_BossHP;//ボスの最大HP（HPバー用）
 
     [SerializeField]
     private int[] max_CharaHP = new int[3];//キャラの最大HP（HPバー用）
@@ -275,13 +274,119 @@ public class BattleScene : SceneBase
 
     }
 
+
+    public void Sp_Atk()//ボスの大技
+    {
+        atkani.se_audio.PlayOneShot(atkani.UseBossSE[2]);//ボスボイス：大技
+
+        if (!DeathChara[0])
+        {
+            //キャラ1のダメージ処理
+            //ダメージ計算式（敵の攻撃力-（キャラの防御力/2））
+            if (b_manager.B_atk * 3 - (Player1_Status[2] / 2) < 0)//防御力が敵の攻撃力より高い場合
+            {
+              
+                Player1_Status[0] -= 1;//最低ダメージ保障
+
+                charahp_bar[0].value = (float)Player1_Status[0] / (float)max_CharaHP[0];//HPバーに反映
+            }
+            else
+            {
+                Player1_Status[0] -= b_manager.B_atk * 3  - (Player1_Status[2] / 2);
+
+                charahp_bar[0].value = (float)Player1_Status[0] / (float)max_CharaHP[0];//HPバーに反映
+            }
+
+            if (Player1_Status[0] <= 0)
+            {
+                Debug.Log("sp死");
+
+                Player1_Status[1] = 0;//死んだらそのキャラの攻撃力を0にする
+
+                DeathChara[0] = true;//キャラ1死
+
+                deathcount++;//死亡カウント+
+
+                Atk_Cal();//攻撃力合計再計算
+
+                Destroy(CharaImage[0]);
+            }
+        }
+         
+        //キャラ2のダメージ処理
+        //ダメージ計算式（敵の攻撃力-（キャラの防御力/2））
+        if(!DeathChara[1])
+        {
+            if (b_manager.B_atk * 3 - (Player2_Status[2] / 2) < 0)//防御力が敵の攻撃力より高い場合
+            {
+                Player2_Status[0] -= 1;//最低ダメージ保障
+
+                charahp_bar[1].value = (float)Player2_Status[0] / (float)max_CharaHP[1];//HPバーに反映
+            }
+            else
+            {
+                Player2_Status[0] -= b_manager.B_atk * 3 - (Player2_Status[2] / 2);
+
+                charahp_bar[1].value = (float)Player2_Status[0] / (float)max_CharaHP[1];//HPバーに反映
+            }
+
+            if (Player2_Status[0] <= 0)
+            {
+                Debug.Log("2死");
+
+                Player2_Status[1] = 0;//死んだらそのキャラの攻撃力を0にする
+
+                DeathChara[1] = true;//キャラ2死
+
+                deathcount++;//死亡カウント+
+
+                Atk_Cal();//攻撃力合計再計算
+
+                Destroy(CharaImage[1]);
+            }
+        }
+
+        if (!DeathChara[2])
+        {
+            //キャラ3のダメージ処理
+            //ダメージ計算式（敵の攻撃力-（キャラの防御力/2））
+            if (b_manager.B_atk * 3 - (Player3_Status[2] / 2) < 0)//防御力が敵の攻撃力より高い場合
+            {
+                Player3_Status[0] -= 1;//最低ダメージ保障
+
+                charahp_bar[2].value = (float)Player3_Status[0] / (float)max_CharaHP[2];//HPバーに反映
+            }
+            else
+            {
+                Player3_Status[0] -= b_manager.B_atk * 3 - (Player3_Status[2] / 2);
+
+                charahp_bar[2].value = (float)Player3_Status[0] / (float)max_CharaHP[2];//HPバーに反映
+            }
+
+            if (Player3_Status[0] <= 0)
+            {
+                Debug.Log("3死");
+
+                Player3_Status[1] = 0;//死んだらそのキャラの攻撃力を0にする
+
+                DeathChara[2] = true;//キャラ3死
+
+                deathcount++;//死亡カウント+
+
+                Atk_Cal();//攻撃力合計再計算
+
+                Destroy(CharaImage[2]);
+            }
+        }
+           
+    }
+
     public void BattleButton()//攻撃ボタン
     {
         //ボス登場ボイスが終わったらボタンの処理を許可
         if(b_manager.timestart)
         {
             Debug.Log("敵にダメージ");
-
             atkani.se_audio.PlayOneShot(atkani.SE[1]);//打撃音
 
             b_manager.B_hp -= total_atk;
