@@ -35,8 +35,12 @@ public class BattleManager : MonoBehaviour
 
     public bool boss_death;//ボス死亡フラグ
 
-    [SerializeField]
-    private float timeleft;//必殺技抽選用のカウントダウン
+
+    public float total_time = 10.0f;//大技発動時間をここに入れる
+    private int second;//テキスト反映用
+
+    public bool s_start;//大技発動中
+
 
 
     // Start is called before the first frame update
@@ -67,24 +71,37 @@ public class BattleManager : MonoBehaviour
                 get_c = false;
             }
 
-            if(timestart && !boss_death)
+            if(timestart && !boss_death && !s_start)
             boss_atktime -= Time.deltaTime;//ここで攻撃時間のカウントダウン
 
             //ボスのHPが一定を下回ると大技
-            if(B_hp <= battlescene.max_BossHP/2 && start_spatk == 0)
+            if(B_hp <= battlescene.max_BossHP/2 && !boss_death)
             {
-                timeleft -= Time.deltaTime;
-
-                if (timeleft <= 0.0)
+             
+                if(start_spatk!=1)
                 {
-                    timeleft = 1.0f;
                     SP_Atk_Time();
-                    if(start_spatk == 1)
-                    {
-                        Debug.Log("ひさい");
-                    }
                 }
-                    
+                
+                if (start_spatk == 1 && !boss_death && !s_start)
+                {
+                    battlescene.spatk_timer.SetActive(true);//タイマー表示
+                    total_time -= Time.deltaTime;//発動カウントダウン開始
+                    second = (int)total_time;
+                    battlescene.timetext.text = second.ToString();//テキストに反映 
+
+                    if (total_time <= 0)
+                    {
+                        s_start = true;
+                        total_time = 10.0f;//タイムリセット
+                        Debug.Log("いいい");
+                        second = 0;
+                        battlescene.spatk_timer.SetActive(false);//タイマー非表示
+                        //battlescene.Sp_Atk();//必殺技発動
+                    }
+
+
+                }
             }
 
             //攻撃時間が0になったら攻撃
@@ -93,6 +110,7 @@ public class BattleManager : MonoBehaviour
 
             if(B_hp<=0 && judge)
             {
+                battlescene.spatk_timer.SetActive(false);//タイマー非表示
                 atkani.BossDead();//ボス死亡処理に移行
             }
             else if(battlescene.deathcount == 3 && judge)
@@ -134,6 +152,6 @@ public class BattleManager : MonoBehaviour
 
     public void SP_Atk_Time()
     {
-        start_spatk = Random.Range(0, 2);
+        start_spatk = Random.Range(0, 8);
     }
 }

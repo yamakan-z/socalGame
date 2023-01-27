@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class BattleScene : SceneBase
 {
 
+    public GameObject HeaderUI;//システムUI
+
     private StageSelectData stageSelectData;
 
     [SerializeField]
@@ -47,11 +49,22 @@ public class BattleScene : SceneBase
     public int deathcount;//死亡キャラ数
 
    
+    public GameObject spatk_timer;//大技発動時間を知らせるタイマー表示
+    
+    public Text timetext;//タイマーテキスト
+
+    public S_AtkManager s_atk_manager;//大技マネージャー
+
+   
     //呼び出された瞬間に呼ばれる関数
     public override void Init()
     {
        
         base.Init();
+
+        HeaderUI = GameObject.Find("HeaderUI");
+
+        HeaderUI.SetActive(false);//ヘッダーUIの非表示
 
         stageSelectData = (StageSelectData)ManagerAccessor.Instance.sceneManager.DeliveryData;
         battlemanager = GameObject.Find("BattleManager");
@@ -277,114 +290,122 @@ public class BattleScene : SceneBase
 
     public void Sp_Atk()//ボスの大技
     {
-        atkani.se_audio.PlayOneShot(atkani.UseBossSE[2]);//ボスボイス：大技
-
-        if (!DeathChara[0])
+        //ボスが死んでいない時のみ通す
+        if(!b_manager.boss_death)
         {
-            //キャラ1のダメージ処理
+            Debug.Log("aaaa");
+            
+            //atkani.se_audio.PlayOneShot(atkani.SE[2]);//打撃音
+
+            if (!DeathChara[0])
+            {
+                //キャラ1のダメージ処理
+                //ダメージ計算式（敵の攻撃力-（キャラの防御力/2））
+                if (b_manager.B_atk * 10 - (Player1_Status[2] / 2) <= 0)//防御力が敵の攻撃力より高い場合
+                {
+
+                    Player1_Status[0] -= 1;//最低ダメージ保障
+
+                    charahp_bar[0].value = (float)Player1_Status[0] / (float)max_CharaHP[0];//HPバーに反映
+                }
+                else
+                {
+                    Player1_Status[0] -= b_manager.B_atk * 10 - (Player1_Status[2] / 2);
+
+                    charahp_bar[0].value = (float)Player1_Status[0] / (float)max_CharaHP[0];//HPバーに反映
+                }
+
+                if (Player1_Status[0] <= 0)
+                {
+                    Debug.Log("sp死");
+
+                    Player1_Status[1] = 0;//死んだらそのキャラの攻撃力を0にする
+
+                    DeathChara[0] = true;//キャラ1死
+
+                    deathcount++;//死亡カウント+
+
+                    Atk_Cal();//攻撃力合計再計算
+
+                    Destroy(CharaImage[0]);
+                }
+            }
+
+            //キャラ2のダメージ処理
             //ダメージ計算式（敵の攻撃力-（キャラの防御力/2））
-            if (b_manager.B_atk * 3 - (Player1_Status[2] / 2) < 0)//防御力が敵の攻撃力より高い場合
+            if (!DeathChara[1])
             {
-              
-                Player1_Status[0] -= 1;//最低ダメージ保障
+                if (b_manager.B_atk * 10 - (Player2_Status[2] / 2) <= 0)//防御力が敵の攻撃力より高い場合
+                {
+                    Player2_Status[0] -= 1;//最低ダメージ保障
 
-                charahp_bar[0].value = (float)Player1_Status[0] / (float)max_CharaHP[0];//HPバーに反映
+                    charahp_bar[1].value = (float)Player2_Status[0] / (float)max_CharaHP[1];//HPバーに反映
+                }
+                else
+                {
+                    Player2_Status[0] -= b_manager.B_atk * 10 - (Player2_Status[2] / 2);
+
+                    charahp_bar[1].value = (float)Player2_Status[0] / (float)max_CharaHP[1];//HPバーに反映
+                }
+
+                if (Player2_Status[0] <= 0)
+                {
+                    Debug.Log("2死");
+
+                    Player2_Status[1] = 0;//死んだらそのキャラの攻撃力を0にする
+
+                    DeathChara[1] = true;//キャラ2死
+
+                    deathcount++;//死亡カウント+
+
+                    Atk_Cal();//攻撃力合計再計算
+
+                    Destroy(CharaImage[1]);
+                }
             }
-            else
+
+            if (!DeathChara[2])
             {
-                Player1_Status[0] -= b_manager.B_atk * 3  - (Player1_Status[2] / 2);
+                //キャラ3のダメージ処理
+                //ダメージ計算式（敵の攻撃力-（キャラの防御力/2））
+                if (b_manager.B_atk * 10 - (Player3_Status[2] / 2) <= 0)//防御力が敵の攻撃力より高い場合
+                {
+                    Player3_Status[0] -= 1;//最低ダメージ保障
 
-                charahp_bar[0].value = (float)Player1_Status[0] / (float)max_CharaHP[0];//HPバーに反映
+                    charahp_bar[2].value = (float)Player3_Status[0] / (float)max_CharaHP[2];//HPバーに反映
+                }
+                else
+                {
+                    Player3_Status[0] -= b_manager.B_atk * 10 - (Player3_Status[2] / 2);
+
+                    charahp_bar[2].value = (float)Player3_Status[0] / (float)max_CharaHP[2];//HPバーに反映
+                }
+
+                if (Player3_Status[0] <= 0)
+                {
+                    Debug.Log("3死");
+
+                    Player3_Status[1] = 0;//死んだらそのキャラの攻撃力を0にする
+
+                    DeathChara[2] = true;//キャラ3死
+
+                    deathcount++;//死亡カウント+
+
+                    Atk_Cal();//攻撃力合計再計算
+
+                    Destroy(CharaImage[2]);
+                }
             }
 
-            if (Player1_Status[0] <= 0)
-            {
-                Debug.Log("sp死");
+          // s_atk_manager.StartCoroutine(s_atk_manager.EndSpAtk());
 
-                Player1_Status[1] = 0;//死んだらそのキャラの攻撃力を0にする
-
-                DeathChara[0] = true;//キャラ1死
-
-                deathcount++;//死亡カウント+
-
-                Atk_Cal();//攻撃力合計再計算
-
-                Destroy(CharaImage[0]);
-            }
         }
-         
-        //キャラ2のダメージ処理
-        //ダメージ計算式（敵の攻撃力-（キャラの防御力/2））
-        if(!DeathChara[1])
-        {
-            if (b_manager.B_atk * 3 - (Player2_Status[2] / 2) < 0)//防御力が敵の攻撃力より高い場合
-            {
-                Player2_Status[0] -= 1;//最低ダメージ保障
-
-                charahp_bar[1].value = (float)Player2_Status[0] / (float)max_CharaHP[1];//HPバーに反映
-            }
-            else
-            {
-                Player2_Status[0] -= b_manager.B_atk * 3 - (Player2_Status[2] / 2);
-
-                charahp_bar[1].value = (float)Player2_Status[0] / (float)max_CharaHP[1];//HPバーに反映
-            }
-
-            if (Player2_Status[0] <= 0)
-            {
-                Debug.Log("2死");
-
-                Player2_Status[1] = 0;//死んだらそのキャラの攻撃力を0にする
-
-                DeathChara[1] = true;//キャラ2死
-
-                deathcount++;//死亡カウント+
-
-                Atk_Cal();//攻撃力合計再計算
-
-                Destroy(CharaImage[1]);
-            }
-        }
-
-        if (!DeathChara[2])
-        {
-            //キャラ3のダメージ処理
-            //ダメージ計算式（敵の攻撃力-（キャラの防御力/2））
-            if (b_manager.B_atk * 3 - (Player3_Status[2] / 2) < 0)//防御力が敵の攻撃力より高い場合
-            {
-                Player3_Status[0] -= 1;//最低ダメージ保障
-
-                charahp_bar[2].value = (float)Player3_Status[0] / (float)max_CharaHP[2];//HPバーに反映
-            }
-            else
-            {
-                Player3_Status[0] -= b_manager.B_atk * 3 - (Player3_Status[2] / 2);
-
-                charahp_bar[2].value = (float)Player3_Status[0] / (float)max_CharaHP[2];//HPバーに反映
-            }
-
-            if (Player3_Status[0] <= 0)
-            {
-                Debug.Log("3死");
-
-                Player3_Status[1] = 0;//死んだらそのキャラの攻撃力を0にする
-
-                DeathChara[2] = true;//キャラ3死
-
-                deathcount++;//死亡カウント+
-
-                Atk_Cal();//攻撃力合計再計算
-
-                Destroy(CharaImage[2]);
-            }
-        }
-           
     }
 
     public void BattleButton()//攻撃ボタン
     {
         //ボス登場ボイスが終わったらボタンの処理を許可
-        if(b_manager.timestart)
+        if(b_manager.timestart && !b_manager.s_start)
         {
             Debug.Log("敵にダメージ");
             atkani.se_audio.PlayOneShot(atkani.SE[1]);//打撃音
@@ -407,11 +428,14 @@ public class BattleScene : SceneBase
     public void Win()
     {
         //勝利したときの処理
+        HeaderUI.SetActive(true);//ヘッダーUIの表示
         b_manager.get_c = true;//バトルシーンを再取得出来るようにする
         b_manager.timestart = false;//タイム処理を切っておく
         b_manager.updatastart = false;//アップデートを切る4
         b_manager.judge = true;
         b_manager.boss_death = false;
+        b_manager.s_start = false;
+        b_manager.total_time = 10.0f;//即死攻撃時間リセット
 
         //ステージクリア情報を取得
         var stageClearData = ManagerAccessor.Instance.dataManager.GetStageClearData();
@@ -424,7 +448,30 @@ public class BattleScene : SceneBase
         }
 
         //報酬の設定
-        int amount = 1000;
+        int amount = 0;
+
+        //ステージ毎に報酬を設定
+        if(b_manager.Stage_Id==1)
+        {
+            amount = 1000;
+        }
+        else if (b_manager.Stage_Id == 2)
+        {
+            amount = 3000;
+        }
+        else if (b_manager.Stage_Id == 3)
+        {
+            amount = 6000;
+        }
+        else if (b_manager.Stage_Id == 4)
+        {
+            amount = 9000;
+        }
+        else if (b_manager.Stage_Id == 5)
+        {
+            amount = 12000;
+        }
+
         var api = new UserAPI();
         StartCoroutine(api.AddMoney(amount, (response) =>
         {
@@ -436,11 +483,13 @@ public class BattleScene : SceneBase
 
     public void Lose()
     {
+        HeaderUI.SetActive(true);//ヘッダーUIの表示
         b_manager.get_c = true;//バトルシーンを再取得出来るようにする
         b_manager.timestart = false;//タイム処理を切っておく
         b_manager.updatastart = false;//アップデートを切る
         b_manager.judge = true;
-
+        b_manager.s_start = false;
+        b_manager.total_time = 10.0f;//即死攻撃時間リセット
         //敗北したときの処理
         ManagerAccessor.Instance.sceneManager.SceneChange(SceneType.Type.StageSelectScene);
     }

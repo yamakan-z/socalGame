@@ -2268,7 +2268,8 @@ MonoBehaviour:
   get_c: 0
   judge: 0
   boss_death: 0
-  timeleft: 1
+  total_time: 10
+  s_start: 0
 --- !u!4 &1509451377
 Transform:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ public class AtkAni : MonoBehaviour
     public AudioSource start_se;//登場ボイスを流す
 
     //汎用SE
-    [NamedArrayAttribute(new string[] { "攻撃SE","攻撃ボタンSE", "ここから先はNULL" })]
+    [NamedArrayAttribute(new string[] { "攻撃SE","攻撃ボタンSE",  "大技SE","ここから先はNULL" })]
     public AudioClip[] SE;
 
     //各ボスのSE
@@ -49,7 +49,7 @@ public class AtkAni : MonoBehaviour
 
         if(!StartBossSE_End)
         {
-            start_se.Play();//ボスボイス：攻撃
+            start_se.Play();//ボスボイス：登場
             StartBossSE_End = true;
         }
 
@@ -64,6 +64,7 @@ public class AtkAni : MonoBehaviour
     {
         Debug.Log("おわり"+start_se.isPlaying);
 
+        //登場ボイスが終わっていれば処理開始
         if (!start_se.isPlaying && StartBossSE_End && se_one)
         {
             Debug.Log("はじめ");
@@ -149,7 +150,7 @@ public class AtkAni : MonoBehaviour
         b_manager.boss_death = true;//ボス死亡フラグON
 
         DeathAnim.SetActive(true);//アニメーション起動
-       
+
         //ボスが死ぬとき
         se_audio.PlayOneShot(UseBossSE[3]);//ボスボイス：死亡
         // コルーチンの起動
