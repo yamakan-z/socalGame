@@ -25,7 +25,14 @@ public class AtkAni : MonoBehaviour
 
     public AudioSource se_audio;//AudioSource型の変数aを宣言 使用するAudioSourceコンポーネントをアタッチ必要
 
-    public AudioSource start_se;//登場ボイスを流す
+    //登場ボイスを流す
+    public AudioSource start_se;
+    public AudioSource start_se2;
+    public AudioSource start_se3;
+    public AudioSource start_se4;
+    public AudioSource start_se5;
+
+    [SerializeField] private AudioSource Usestart_se;//使用するボイス
 
     //汎用SE
     [NamedArrayAttribute(new string[] { "攻撃SE","攻撃ボタンSE",  "大技SE","ここから先はNULL" })]
@@ -34,6 +41,9 @@ public class AtkAni : MonoBehaviour
     //各ボスのSE
     [NamedArrayAttribute(new string[] { "登場ボイス", "攻撃ボイス", "大技ボイス", "討伐ボイス","ここから先はNULL" })]
     public AudioClip[] BossSE1;
+
+    [NamedArrayAttribute(new string[] { "登場ボイス", "攻撃ボイス", "大技ボイス", "討伐ボイス", "ここから先はNULL" })]
+    public AudioClip[] BossSE2;
 
     public AudioClip[] UseBossSE;//このステージで使用するボスSE
 
@@ -49,7 +59,7 @@ public class AtkAni : MonoBehaviour
 
         if(!StartBossSE_End)
         {
-            start_se.Play();//ボスボイス：登場
+            Usestart_se.Play();//ボスボイス：登場
             StartBossSE_End = true;
         }
 
@@ -62,10 +72,10 @@ public class AtkAni : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("おわり"+start_se.isPlaying);
+        Debug.Log("おわり"+ Usestart_se.isPlaying);
 
         //登場ボイスが終わっていれば処理開始
-        if (!start_se.isPlaying && StartBossSE_End && se_one)
+        if (!Usestart_se.isPlaying && StartBossSE_End && se_one)
         {
             Debug.Log("はじめ");
             b_manager.timestart = true;
@@ -74,7 +84,7 @@ public class AtkAni : MonoBehaviour
 
         if (!StartBossSE_End)
         {
-            start_se.Play();//ボスボイス：攻撃
+            Usestart_se.Play();//ボスボイス：攻撃
             StartBossSE_End = true;
         }
 
@@ -126,23 +136,30 @@ public class AtkAni : MonoBehaviour
         if (b_manager.Stage_Id == 1)
         {
             UseBossSE = BossSE1;
+            Usestart_se = start_se;
         }
-        //else if (b_manager.Stage_Id == 2)
-        //{
-        //    UseBossSE = BossSE2;
-        //}
+        else if (b_manager.Stage_Id == 2)
+        {
+            UseBossSE = BossSE2;
+            Usestart_se = start_se2;
+        }
         //else if (b_manager.Stage_Id == 3)
         //{
         //    UseBossSE = BossSE3;
+        //     Usestart_se = start_se3;
         //}
         //else if (b_manager.Stage_Id == 4)
         //{
         //    UseBossSE = BossSE4;
+        //     Usestart_se = start_se4;
         //}
         //else if (b_manager.Stage_Id == 5)
         //{
         //    UseBossSE = BossSE5;
+        //     Usestart_se = start_se5;
         //}
+
+
     }
 
     public void BossDead()
