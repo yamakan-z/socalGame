@@ -35,7 +35,12 @@ public class ButtonManager : MonoBehaviour
         else if (b_manager.Stage_Id == 2)
         {
             Stage1Button.SetActive(true);
+            changetime = 3;
             //Instantiate(CreateButton[0], Legs[randnum].transform.position, Quaternion.identity);
+        }
+        else if (b_manager.Stage_Id == 3)
+        {
+            Stage1Button.SetActive(true);
         }
     }
 
@@ -46,6 +51,20 @@ public class ButtonManager : MonoBehaviour
         if (b_manager.Stage_Id == 2 && b_manager.B_hp <= max_BossHP / 2)
         {
             Debug.Log("‚Ð‚©");
+            changetime -= Time.deltaTime;
+
+            if (changetime <= 0 && !onechange)
+            {
+                Stage1Button.SetActive(false);
+                onechange = true;
+                ButtonChange();
+            }
+
+        }
+        else if (b_manager.Stage_Id == 3 && b_manager.B_hp <= max_BossHP / 2)
+        {
+            Debug.Log("‚Ð‚©2");
+
             changetime -= Time.deltaTime;
 
             if (changetime <= 0 && !onechange)

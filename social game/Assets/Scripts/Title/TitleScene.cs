@@ -10,9 +10,17 @@ public class TitleScene : SceneBase
     [SerializeField]
     private Text uidText;//UID表示用のテキスト
 
+    [SerializeField] private GameObject B_manager;//BGMマネージャー呼び出し
+
+    BGMManager bgmmanager;//BGMスクリプト
+
+
     override public void Init()
     {
         base.Init();
+
+        B_manager = GameObject.Find("BGMManager");
+        bgmmanager = B_manager.GetComponent<BGMManager>();//スクリプト獲得
 
         string uid = ManagerAccessor.Instance.dataManager.GetUID();
         if(string.IsNullOrEmpty(uid))
@@ -100,6 +108,7 @@ public class TitleScene : SceneBase
 
             ManagerAccessor.Instance.screenManager.TapGuard(false);
             ManagerAccessor.Instance.screenManager.LoadingAnimation(false);
+            bgmmanager.start_bgm = true;//ここでメインBGM
 
             //通信が成功した場合
             if (response.status.Contains("NG"))

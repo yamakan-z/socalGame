@@ -1157,14 +1157,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6745283, b: 0.6745283, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 602227c339f3f5b4cb0043d90e469221, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1221,10 +1221,7 @@ MonoBehaviour:
   canvas: {fileID: 5418909967666141263}
   contentObj: {fileID: 1010879614880326788}
   stageCellPrefab: {fileID: 6933084879423241127, guid: a3758c329fa4c6b45b3f4e6bb7fde841, type: 3}
-  BattleManager: {fileID: 0}
-  boss_hp: 0
-  boss_atk: 0
-  boss_def: 0
+  battlemanager: {fileID: 0}
 --- !u!1 &9131233424875482714
 GameObject:
   m_ObjectHideFlags: 0

@@ -45,6 +45,15 @@ public class AtkAni : MonoBehaviour
     [NamedArrayAttribute(new string[] { "登場ボイス", "攻撃ボイス", "大技ボイス", "討伐ボイス", "ここから先はNULL" })]
     public AudioClip[] BossSE2;
 
+    [NamedArrayAttribute(new string[] { "登場ボイス", "攻撃ボイス", "大技ボイス", "討伐ボイス", "ここから先はNULL" })]
+    public AudioClip[] BossSE3;
+
+    [NamedArrayAttribute(new string[] { "登場ボイス", "攻撃ボイス", "大技ボイス", "討伐ボイス", "ここから先はNULL" })]
+    public AudioClip[] BossSE4;
+
+    [NamedArrayAttribute(new string[] { "登場ボイス", "攻撃ボイス", "大技ボイス", "討伐ボイス", "ここから先はNULL" })]
+    public AudioClip[] BossSE5;
+
     public AudioClip[] UseBossSE;//このステージで使用するボスSE
 
     public bool StartBossSE_End;//登場ボイス終了フラグ
@@ -143,21 +152,21 @@ public class AtkAni : MonoBehaviour
             UseBossSE = BossSE2;
             Usestart_se = start_se2;
         }
-        //else if (b_manager.Stage_Id == 3)
-        //{
-        //    UseBossSE = BossSE3;
-        //     Usestart_se = start_se3;
-        //}
-        //else if (b_manager.Stage_Id == 4)
-        //{
-        //    UseBossSE = BossSE4;
-        //     Usestart_se = start_se4;
-        //}
-        //else if (b_manager.Stage_Id == 5)
-        //{
-        //    UseBossSE = BossSE5;
-        //     Usestart_se = start_se5;
-        //}
+        else if (b_manager.Stage_Id == 3)
+        {
+            UseBossSE = BossSE3;
+            Usestart_se = start_se3;
+        }
+        else if (b_manager.Stage_Id == 4)
+        {
+            UseBossSE = BossSE4;
+            Usestart_se = start_se4;
+        }
+        else if (b_manager.Stage_Id == 5)
+        {
+            UseBossSE = BossSE5;
+            Usestart_se = start_se5;
+        }
 
 
     }

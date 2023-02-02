@@ -452,7 +452,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f52eb6ec0b7fb4848ba7e6437d2022f6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2848,7 +2848,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c5b1a4ec5f48fc242ba506a395b8c0b1, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -4446,9 +4446,9 @@ MonoBehaviour:
   m_Sprite:
   - {fileID: 21300000, guid: 2ab0559f9a87c8a468582ca519ccd1eb, type: 3}
   - {fileID: 21300000, guid: f9bf24fdae6174447af18295c6c4bb6d, type: 3}
-  - {fileID: 21300000, guid: c31621d410ead724b92e668e41c27b51, type: 3}
   - {fileID: 21300000, guid: ff85a79c441558c4b974ec93ead394f7, type: 3}
-  - {fileID: 21300000, guid: b22985266a3143540a5c9bd3f8e948b6, type: 3}
+  - {fileID: 21300000, guid: b52652ba9bb4cf54fa8ce783bd8640b5, type: 3}
+  - {fileID: 21300000, guid: 5c4505dff3a458f49aa4c10388ea0deb, type: 3}
   battlemanager: {fileID: 0}
   max_BossHP: 0
 --- !u!1 &8245189975886533337
@@ -4745,6 +4745,21 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 072b7d295e0884e46acbf55f215b34d4, type: 3}
   - {fileID: 8300000, guid: 6844dc7f6fa21be44bf5ca50ec0a67fa, type: 3}
   - {fileID: 8300000, guid: 97925988e1248404ca9d976468207003, type: 3}
+  BossSE3:
+  - {fileID: 8300000, guid: a4b7da2dfd0ec1444aa49d42b2157797, type: 3}
+  - {fileID: 8300000, guid: 08d97eb2b72043244b0fb362c111671b, type: 3}
+  - {fileID: 8300000, guid: a99b3f0e0fdcb2a46b5ead41f42fe80b, type: 3}
+  - {fileID: 8300000, guid: cd2afa64fb132da4e8dd95b00910e604, type: 3}
+  BossSE4:
+  - {fileID: 8300000, guid: c5b1a4ec5f48fc242ba506a395b8c0b1, type: 3}
+  - {fileID: 8300000, guid: f943b74cadd0ada4e8785fcce9d68bf8, type: 3}
+  - {fileID: 8300000, guid: f52eb6ec0b7fb4848ba7e6437d2022f6, type: 3}
+  - {fileID: 8300000, guid: 3a0fb0b8704bf3e4d8de19094d6ee13c, type: 3}
+  BossSE5:
+  - {fileID: 8300000, guid: a6083ace8b2abb1428073243328916f6, type: 3}
+  - {fileID: 8300000, guid: de23e0b736c9e0446933dc4c35687348, type: 3}
+  - {fileID: 8300000, guid: 1e90c9ec000bf1b4199dcef0f596b97c, type: 3}
+  - {fileID: 8300000, guid: d218bfdd9b85ee941a2f79b34fcdc3a6, type: 3}
   UseBossSE: []
   StartBossSE_End: 0
 --- !u!82 &648629890
