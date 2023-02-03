@@ -8,8 +8,6 @@ public class BGMManager : MonoBehaviour
 
     public bool start_bgm;//BGM開始
 
-    bool one;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +17,19 @@ public class BGMManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(start_bgm && !one)
-        {
-            Debug.Log("開始");
-            audio.Play();//曲開始
-            one = true;
-        }
+       
     }
+
+    public void BGM_Start()
+    {
+        Debug.Log("開始");
+        audio.Play();//曲開始
+    }
+
+    public void BGM_Stop()
+    {
+        Debug.Log("停止");
+        audio.Stop();//曲ストップ
+    }
+
 }

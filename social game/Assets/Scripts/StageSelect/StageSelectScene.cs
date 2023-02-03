@@ -13,8 +13,15 @@ public class StageSelectScene : SceneBase
     [SerializeField]
     private GameObject battlemanager;//バトルマネージャー呼び出し
 
+    [SerializeField] private GameObject B_manager;//BGMマネージャー呼び出し
+
+    BGMManager bgmmanager;//BGMスクリプト
+
     private void Start()
     {
+        B_manager = GameObject.Find("BGMManager");
+        bgmmanager = B_manager.GetComponent<BGMManager>();//スクリプト獲得
+
         battlemanager = GameObject.Find("BattleManager");
     }
 
@@ -96,6 +103,8 @@ public class StageSelectScene : SceneBase
         var stageSelectData = new StageSelectData();
         stageSelectData.selectStageId = stageId;
         ManagerAccessor.Instance.sceneManager.DeliveryData = (object)stageSelectData;
+
+        bgmmanager.BGM_Stop();//シーンBGMを止める
 
         //バトルシーンに遷移
         ManagerAccessor.Instance.sceneManager.SceneChange(SceneType.Type.BattleScene);

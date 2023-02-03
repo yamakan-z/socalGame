@@ -1,11 +1,11 @@
 chara_id,name,rank,icon_sprite,stand_sprite
-1,帝国軍大佐　ヨハン,R,Assets/Resources/Chara/Icon/chara_i001.png,Assets/Resources/Chara/Stand/chara_s001.png
-2,死神見習い　ダミイ,R,Assets/Resources/Chara/Icon/chara_i002.png,Assets/Resources/Chara/Stand/chara_s002.png
-3,悪魔一族の末裔　リリス,R,Assets/Resources/Chara/Icon/chara_i003.png,Assets/Resources/Chara/Stand/chara_s003.png
-4,アウトロー達の長　ジョニー,R,Assets/Resources/Chara/Icon/chara_i004.png,Assets/Resources/Chara/Stand/chara_s004.png
-5,雷の騎士　サンドラ,R,Assets/Resources/Chara/Icon/chara_i005.png,Assets/Resources/Chara/Stand/chara_s005.png
-6,悪魔に愛された少女　アンリ,SR,Assets/Resources/Chara/Icon/chara_i006.png,Assets/Resources/Chara/Stand/chara_s006.png
-7,悪魔に囚われた少女　エリス,SR,Assets/Resources/Chara/Icon/chara_i007.png,Assets/Resources/Chara/Stand/chara_s007.png
-8,悪魔を使役する少年　ジャン,SR,Assets/Resources/Chara/Icon/chara_i008.png,Assets/Resources/Chara/Stand/chara_s008.png
-9,努力　未来　A Beautiful Star,SSR,Assets/Resources/Chara/Icon/chara_i009.png,Assets/Resources/Chara/Stand/chara_s009.png
-10,成長するものと生きるもの、いつも美しさで終わるもの,SSR,Assets/Resources/Chara/Icon/chara_i010.png,Assets/Resources/Chara/Stand/chara_s010.png
+1,帝国軍大佐　ヨハン,R,Chara/Icon/chara_i001,Chara/Stand/chara_s001
+2,死神見習い　ダミイ,R,Chara/Icon/chara_i002,Chara/Stand/chara_s002
+3,悪魔一族の末裔　リリス,R,Chara/Icon/chara_i003,Chara/Stand/chara_s003
+4,アウトロー達の長　ジョニー,R,Chara/Icon/chara_i004,Chara/Stand/chara_s004
+5,雷の騎士　サンドラ,R,Chara/Icon/chara_i005,Chara/Stand/chara_s005
+6,悪魔に愛された少女　アンリ,SR,Chara/Icon/chara_i006,Chara/Stand/chara_s006
+7,悪魔に囚われた少女　エリス,SR,Chara/Icon/chara_i007,Chara/Stand/chara_s007
+8,悪魔を使役する少年　ジャン,SR,Chara/Icon/chara_i008,Chara/Stand/chara_s008
+9,努力　未来　A Beautiful Star,SSR,Chara/Icon/chara_i009,Chara/Stand/chara_s009
+10,成長するものと生きるもの、いつも美しさで終わるもの,SSR,Chara/Icon/chara_i010,Chara/Stand/chara_s010

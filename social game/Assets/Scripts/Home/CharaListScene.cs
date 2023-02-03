@@ -145,7 +145,7 @@ public class CharaListScene : SceneBase
               if (response.status.Contains("NG"))
               {
                   //ƒGƒ‰[‚Ìê‡
-                  Debug.LogError(response.error);
+                  //Debug.LogError(response.error);
                   return;
               }
 

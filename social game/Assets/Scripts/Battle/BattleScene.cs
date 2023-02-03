@@ -55,7 +55,11 @@ public class BattleScene : SceneBase
 
     public S_AtkManager s_atk_manager;//大技マネージャー
 
-   
+    [SerializeField] private GameObject B_manager;//BGMマネージャー呼び出し
+
+    BGMManager bgmmanager;//BGMスクリプト
+
+
     //呼び出された瞬間に呼ばれる関数
     public override void Init()
     {
@@ -67,8 +71,12 @@ public class BattleScene : SceneBase
         HeaderUI.SetActive(false);//ヘッダーUIの非表示
 
         stageSelectData = (StageSelectData)ManagerAccessor.Instance.sceneManager.DeliveryData;
+
         battlemanager = GameObject.Find("BattleManager");
         b_manager = battlemanager.GetComponent<BattleManager>();//スクリプト獲得
+
+        B_manager = GameObject.Find("BGMManager");
+        bgmmanager = B_manager.GetComponent<BGMManager>();//スクリプト獲得
 
         //最大HPを保存
         max_BossHP = b_manager.B_hp;
@@ -472,6 +480,8 @@ public class BattleScene : SceneBase
             amount = 12000;
         }
 
+        bgmmanager.BGM_Start();//シーンBGM
+
         var api = new UserAPI();
         StartCoroutine(api.AddMoney(amount, (response) =>
         {
@@ -490,6 +500,9 @@ public class BattleScene : SceneBase
         b_manager.judge = true;
         b_manager.s_start = false;
         b_manager.total_time = 10.0f;//即死攻撃時間リセット
+
+        bgmmanager.BGM_Start();//シーンBGM
+
         //敗北したときの処理
         ManagerAccessor.Instance.sceneManager.SceneChange(SceneType.Type.StageSelectScene);
     }

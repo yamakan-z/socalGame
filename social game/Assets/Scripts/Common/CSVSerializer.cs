@@ -103,13 +103,18 @@ public class CSVSerializer
             float f = (float)Convert.ChangeType(value, typeof(float));
             fieldinfo.SetValue(v, Convert.ChangeType(f, fieldinfo.FieldType));
         }
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
+//        else if (fieldinfo.FieldType == typeof(UnityEngine.Sprite))
+//        {
+//            Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(value.ToString());
+//            fieldinfo.SetValue(v, sprite);
+//        }
+//#endif
         else if (fieldinfo.FieldType == typeof(UnityEngine.Sprite))
         {
-            Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(value.ToString());
+            Sprite sprite = Resources.Load<Sprite>(value.ToString());
             fieldinfo.SetValue(v, sprite);
         }
-#endif
         else if (fieldinfo.FieldType == typeof(string))
             fieldinfo.SetValue(v, value);
         else

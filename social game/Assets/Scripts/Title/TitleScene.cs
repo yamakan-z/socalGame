@@ -108,7 +108,7 @@ public class TitleScene : SceneBase
 
             ManagerAccessor.Instance.screenManager.TapGuard(false);
             ManagerAccessor.Instance.screenManager.LoadingAnimation(false);
-            bgmmanager.start_bgm = true;//ここでメインBGM
+            bgmmanager.BGM_Start();//ここでBGMをシーンBGMに
 
             //通信が成功した場合
             if (response.status.Contains("NG"))
